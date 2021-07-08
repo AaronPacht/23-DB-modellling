@@ -1,0 +1,115 @@
+1.  ┌──────────┐                    ┌──────────┐
+    │ film     │                    │  viewer  │
+    │ ----     │many            many│  ------  │
+    │ title    ├────────────────────┤   name   │
+    │ year     │                    │   age    │
+    │ id       │                    │   id     │
+    └──────────┘                    └──────────┘
+
+
+                    ┌──────────┐
+                    │ viewed   │
+                    │ ------   │
+                    │ id       │
+                    │view_date │
+                    │ film_id  │
+                    │ viewer_id│
+                    └──────────┘
+
+2.  ┌──────────┐                    ┌──────────┐
+    │ book     │                    │  reader  │
+    │ ----     │many            many│  ------  │
+    │ title    ├────────────────────┤   name   │
+    │ year     │                    │   age    │
+    │ id       │                    │   id     │
+    └──────────┘                    └──────────┘
+
+
+                    ┌──────────┐
+                    │ read     │
+                    │ ------   │
+                    │ id       │
+                    │read_date │
+                    │ book_id  │
+                    │ reader_id│
+                    └──────────┘
+
+3.comic-issue=one-many      There can be many issues of a comic
+  artist-comic=many-many    Multiple artists per comic, and multiple comics per artist
+  writer-comic=many-many    Multiple writers per comic, and multiple comics per writer
+  artist-issue=many-many    Multiple artists per issue, and multiple issues per artist
+  writer-issue=many-many    Multiple writers per issue, and multiple issues per writer
+
+  ┌────────────┐  ┌────────────┐  ┌────────────┐
+  │ artists    │  │ writers    │  │ comics     │
+  │ -------    │  │ -------    │  │ ------     │
+  │ id         │  │ id         │  │ id         │
+  │ name       │  │ name       │  │ name       │
+  │            │  │            │  │ date       │
+  │            │  │            │  │            │
+  └────────────┘  └────────────┘  └────────────┘
+  
+  ┌────────────┐  ┌────────────┐  ┌────────────┐
+  │comic_issues│  │issue_artist│  │issue_writer│
+  │ -----      │  │----------- │  │----------- │
+  │ id         │  │id          │  │id          │
+  │ comic_id   │  │issue_id    │  │issue_id    │
+  │ date       │  │artist_id   │  │writer_id   │
+  │            │  │            │  │            │
+  └────────────┘  └────────────┘  └────────────┘
+
+4.instrument-song=many-many     Instrument can have many songs,songs many instruments
+  setlist-song=one-many        Many songs per setlist
+  setlist-tour date=one-many   Many tour dates per setlist
+
+  ┌───────────┐  ┌───────────┐  ┌───────────┐  ┌───────────┐
+  │instrument │  │song       │  │setlist    │  │tour_date  │
+  │---------  │  │----       │  │-------    │  │---------  │
+  │id         │  │id         │  │id         │  │id         │
+  │name       │  │name       │  │song_id    │  │setlist_id │
+  │           │  │           │  │           │  │           │
+  └───────────┘  └───────────┘  └───────────┘  └───────────┘
+
+5.gallery-exhibit=one-many     Many exhibits per gallery
+  exhibit-artwork=one-many     Many artworks per exhibits
+  artist-artwork=one-many      Many artworks per artist
+  curator-artwork=one-many     Many artworks per curator
+
+  ┌───────────┐  ┌───────────┐  ┌───────────┐
+  │gallery    │  │gal_exhibit│  │artwork    │
+  │-------    │  │-------    │  │-------    │
+  │id         │  │id         │  │id         │
+  │name       │  │name       │  │name       │
+  │           │  │gallery_id │  │exhibit_id │
+  └───────────┘  └───────────┘  └───────────┘
+  
+  ┌───────────┐  ┌───────────┐ 
+  │art_artist │  │art_curator│  
+  │--------   │  │--------   │
+  │id         │  │id         │  
+  │name       │  │name       │  
+  │artwork_id │  │artwork_id │  
+  └───────────┘  └───────────┘  
+
+6.music piece-music sheets=one to many  Many sheets per piece
+  instrument-music piece=many-many      Many instruments per piece,many pieces per instrument
+
+  ┌──────────┐  ┌───────────  ┌──────────┐
+  │instrument│  │music_piece  │piece_sh  │
+  │-------   │  │--------- │  │--------  │
+  │id        │  │id        │  │id        │
+  │name      │  │name      │  │piece_id  │
+  └──────────┘  └──────────┘  └──────────┘
+
+7.dishes,restaurants,users
+  users-dishes=one-many
+  restaurants-dishes=one-many
+
+  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐
+  │users        │  │restaurants  │  │dishes       │  │order        │
+  │----         │  │--------     │  │------       │  │----         │
+  │id           │  │id           │  │id           │  │id           │
+  │name         │  │name         │  │name         │  │user_id      │
+  │             │  │             │  │             │  │rest_id      │
+  │             │  │             │  │             │  │dish_id      │
+  └─────────────┘  └─────────────┘  └─────────────┘  └─────────────┘
